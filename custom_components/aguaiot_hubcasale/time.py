@@ -10,7 +10,7 @@ from homeassistant.helpers.update_coordinator import (
 
 from .aguaiot import AguaIOTError
 from .chrono import CHRONO_UNSET, raw_to_time, time_to_raw
-from .const import DOMAIN, TIMES
+from .const import DOMAIN, TIMES, translation_key
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -44,14 +44,11 @@ class AguaIOTHeatingTime(CoordinatorEntity, TimeEntity):
         super().__init__(coordinator)
         self._device = device
         self.entity_description = description
+        self._attr_translation_key = translation_key(description)
 
     @property
     def unique_id(self):
         return f"{self._device.id_device}_{self.entity_description.key}"
-
-    @property
-    def name(self):
-        return self.entity_description.name
 
     @property
     def device_info(self):

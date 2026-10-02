@@ -169,3 +169,25 @@ class TestWritingPrograms:
         device, writes = polygon
         self.run(device.set_register_value("chrono_week_enable_set", 1))
         assert writes == [{"chrono_week_enable_set": 1}]
+
+
+class TestTranslations:
+    """Every entity name must have an English and an Italian translation."""
+
+    def test_all_entity_names_are_translated(self):
+        import json
+        import re
+
+        base = os.path.join(
+            os.path.dirname(__file__), "..", "custom_components", "aguaiot_hubcasale"
+        )
+        with open(os.path.join(base, "const.py")) as f:
+            const_src = f.read()
+        en = json.load(open(os.path.join(base, "translations", "en.json")))["entity"]
+        it = json.load(open(os.path.join(base, "translations", "it.json")))["entity"]
+        assert set(en) == set(it)
+        for platform in en:
+            assert set(en[platform]) == set(it[platform]), platform
+        # the slug rule used by translation_key() in const.py
+        assert "re.sub(r\"[^a-z0-9]+\", \"_\"" in const_src
+        assert re.sub(r"[^a-z0-9]+", "_", "Three-way Valve".lower()).strip("_") in en["sensor"]

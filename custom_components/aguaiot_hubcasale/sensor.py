@@ -6,7 +6,7 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
 )
 
-from .const import DOMAIN, SENSORS
+from .const import DOMAIN, SENSORS, translation_key
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
@@ -42,16 +42,12 @@ class AguaIOTHeatingSensor(CoordinatorEntity, SensorEntity):
         super().__init__(coordinator)
         self._device = device
         self.entity_description = description
+        self._attr_translation_key = translation_key(description)
 
     @property
     def unique_id(self):
         """Return a unique ID."""
         return f"{self._device.id_device}_{self.entity_description.key}"
-
-    @property
-    def name(self):
-        """Return the name of the device, if any."""
-        return self.entity_description.name
 
     @property
     def device_info(self):

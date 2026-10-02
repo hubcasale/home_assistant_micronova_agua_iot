@@ -453,7 +453,7 @@ class AguaIOTWaterDevice(AguaIOTClimateDevice):
     """Representation of an Agua IOT heating device."""
 
     _attr_has_entity_name = True
-    _attr_name = "Water"
+    _attr_translation_key = "water"
     _attr_icon = "mdi:water"
 
     def __init__(self, coordinator, device, parent):

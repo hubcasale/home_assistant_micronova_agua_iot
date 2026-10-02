@@ -1,0 +1,440 @@
+{
+  "config": {
+    "abort": {
+      "device_already_configured": "Il dispositivo è già configurato."
+    },
+    "error": {
+      "connection_error": "Impossibile connettersi alle API Agua IOT.",
+      "unauthorized": "Accesso non riuscito, controlla le credenziali.",
+      "unknown_error": "Errore sconosciuto, controlla la configurazione."
+    },
+    "step": {
+      "user": {
+        "data": {
+          "email": "Indirizzo email",
+          "password": "Password",
+          "endpoint": "Nome app/marchio"
+        },
+        "description": "Inserisci i parametri di Agua IOT"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "title": "Opzioni Micronova Agua IOT",
+        "description": "Seleziona `Bluetooth (rilevamento automatico)` per far rilevare e validare a Home Assistant un modulo BLE Micronova vicino quando invii il modulo (sperimentale).",
+        "data": {
+          "http_timeout": "Timeout delle chiamate API (secondi).",
+          "buffer_read_timeout": "Timeout di lettura del buffer della stufa (secondi).",
+          "language": "Lingua delle descrizioni.",
+          "update_interval": "Intervallo tra gli aggiornamenti (secondi).",
+          "connection_mode": "Modalità di connessione:"
+        },
+        "sections": {
+          "device_fixes": {
+            "name": "Correzioni specifiche per dispositivo",
+            "data": {
+              "air_temp_fix": "[Jolly Mec] Ignora la temperatura aria errata con termostato esterno.",
+              "reading_error_fix": "[Bronpi] Filtra le letture errate (a stufa senza alimentazione)."
+            }
+          }
+        }
+      }
+    }
+  },
+  "selector": {
+    "connection_mode": {
+      "options": {
+        "connection_cloud": "Cloud (API Micronova)",
+        "connection_bluetooth": "Bluetooth (rilevamento automatico)"
+      }
+    },
+    "chrono_days": {
+      "options": {
+        "monday": "Lunedì",
+        "tuesday": "Martedì",
+        "wednesday": "Mercoledì",
+        "thursday": "Giovedì",
+        "friday": "Venerdì",
+        "saturday": "Sabato",
+        "sunday": "Domenica"
+      }
+    }
+  },
+  "services": {
+    "sync_clock": {
+      "name": "Sincronizza l'orologio della stufa",
+      "description": "Sincronizza data e ora della stufa con quelle attuali di Home Assistant."
+    },
+    "set_chrono_program": {
+      "name": "Imposta programma crono",
+      "description": "Imposta uno dei programmi orari settimanali della stufa/caldaia con una sola richiesta. Vengono modificati solo i campi compilati. I giorni selezionati sono abilitati, tutti gli altri disabilitati. Gli orari sono arrotondati per difetto ai 10 minuti.",
+      "fields": {
+        "program": {
+          "name": "Programma",
+          "description": "Numero del programma crono (1-4)."
+        },
+        "start": {
+          "name": "Ora di accensione",
+          "description": "Ora in cui il programma accende l'apparecchio."
+        },
+        "stop": {
+          "name": "Ora di spegnimento",
+          "description": "Ora in cui il programma spegne l'apparecchio."
+        },
+        "days": {
+          "name": "Giorni",
+          "description": "Giorni della settimana in cui il programma è attivo."
+        },
+        "water_temperature": {
+          "name": "Temperatura acqua",
+          "description": "Temperatura acqua impostata dal programma."
+        },
+        "boiler_temperature": {
+          "name": "Temperatura boiler",
+          "description": "Temperatura impostata del boiler (accumulo ACS) dal programma."
+        },
+        "acs": {
+          "name": "ACS",
+          "description": "Abilita la produzione di acqua calda sanitaria durante il programma."
+        },
+        "weekly_enabled": {
+          "name": "Crono settimanale attivo",
+          "description": "Attiva o disattiva il cronotermostato settimanale dell'intero dispositivo."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Stato"
+      },
+      "alarm": {
+        "name": "Allarme"
+      },
+      "real_power": {
+        "name": "Potenza reale"
+      },
+      "real_pellet_power": {
+        "name": "Potenza pellet reale"
+      },
+      "real_wood_power": {
+        "name": "Potenza legna reale"
+      },
+      "real_vent_front": {
+        "name": "Ventola frontale reale"
+      },
+      "real_vent_rear": {
+        "name": "Ventola posteriore reale"
+      },
+      "fuel": {
+        "name": "Combustibile"
+      },
+      "water_pressure": {
+        "name": "Pressione acqua"
+      },
+      "brazier_pressure": {
+        "name": "Pressione braciere"
+      },
+      "extractor_fan": {
+        "name": "Estrattore fumi"
+      },
+      "water_pump": {
+        "name": "Pompa acqua"
+      },
+      "smoke_temperature": {
+        "name": "Temperatura fumi"
+      },
+      "flame_temperature": {
+        "name": "Temperatura fiamma"
+      },
+      "air_temperature": {
+        "name": "Temperatura aria"
+      },
+      "remote_air_temperature": {
+        "name": "Temperatura aria remota"
+      },
+      "vent_rear_temperature": {
+        "name": "Temperatura ventola posteriore"
+      },
+      "vent_front_temperature": {
+        "name": "Temperatura ventola frontale"
+      },
+      "water_temperature": {
+        "name": "Temperatura acqua"
+      },
+      "wood_temperature": {
+        "name": "Temperatura legna"
+      },
+      "pellet_level": {
+        "name": "Livello pellet"
+      },
+      "pellet_quality": {
+        "name": "Qualità pellet"
+      },
+      "combustion_quality": {
+        "name": "Qualità combustione"
+      },
+      "total_hours": {
+        "name": "Ore totali"
+      },
+      "partial_hours": {
+        "name": "Ore parziali"
+      },
+      "service_hours": {
+        "name": "Ore di servizio"
+      },
+      "threshold_service_hours": {
+        "name": "Soglia ore di servizio"
+      },
+      "boiler_temperature": {
+        "name": "Temperatura boiler"
+      },
+      "puffer_temperature_high": {
+        "name": "Temperatura puffer alta"
+      },
+      "puffer_temperature_low": {
+        "name": "Temperatura puffer bassa"
+      },
+      "three_way_valve": {
+        "name": "Valvola a tre vie"
+      }
+    },
+    "binary_sensor": {
+      "pellets_depleted": {
+        "name": "Pellet esaurito"
+      },
+      "wood_reserve": {
+        "name": "Riserva legna"
+      },
+      "external_thermostat": {
+        "name": "Termostato esterno"
+      },
+      "external_thermostat_rear": {
+        "name": "Termostato esterno posteriore"
+      },
+      "external_puffer_thermostat": {
+        "name": "Termostato esterno puffer"
+      },
+      "external_boiler_thermostat": {
+        "name": "Termostato esterno boiler"
+      },
+      "flow_switch": {
+        "name": "Flussostato"
+      }
+    },
+    "number": {
+      "energy_saving_start": {
+        "name": "Avvio risparmio energetico"
+      },
+      "energy_saving_stop": {
+        "name": "Stop risparmio energetico"
+      },
+      "power": {
+        "name": "Potenza"
+      },
+      "pellet_power": {
+        "name": "Potenza pellet"
+      },
+      "wood_power": {
+        "name": "Potenza legna"
+      },
+      "eco_stop_time": {
+        "name": "Tempo ECO Stop"
+      },
+      "pellet_quality": {
+        "name": "Qualità pellet"
+      },
+      "combustion_quality": {
+        "name": "Qualità combustione"
+      },
+      "boiler_setpoint": {
+        "name": "Setpoint boiler"
+      },
+      "puffer_setpoint": {
+        "name": "Setpoint puffer"
+      },
+      "chrono_p1_water_setpoint": {
+        "name": "Crono P1 setpoint acqua"
+      },
+      "chrono_p2_water_setpoint": {
+        "name": "Crono P2 setpoint acqua"
+      },
+      "chrono_p3_water_setpoint": {
+        "name": "Crono P3 setpoint acqua"
+      },
+      "chrono_p4_water_setpoint": {
+        "name": "Crono P4 setpoint acqua"
+      },
+      "chrono_p1_boiler_setpoint": {
+        "name": "Crono P1 setpoint boiler"
+      },
+      "chrono_p2_boiler_setpoint": {
+        "name": "Crono P2 setpoint boiler"
+      },
+      "chrono_p3_boiler_setpoint": {
+        "name": "Crono P3 setpoint boiler"
+      },
+      "chrono_p4_boiler_setpoint": {
+        "name": "Crono P4 setpoint boiler"
+      }
+    },
+    "switch": {
+      "natural_mode": {
+        "name": "Modalità naturale"
+      },
+      "standby": {
+        "name": "Standby"
+      },
+      "auto_mode": {
+        "name": "Modalità automatica"
+      },
+      "powerful_mode": {
+        "name": "Modalità potente"
+      },
+      "eco_stop": {
+        "name": "ECO Stop"
+      },
+      "sleep_mode": {
+        "name": "Modalità Sleep"
+      },
+      "weekly_chrono": {
+        "name": "Cronotermostato settimanale"
+      },
+      "chrono_p1_acs": {
+        "name": "Crono P1 ACS"
+      },
+      "chrono_p2_acs": {
+        "name": "Crono P2 ACS"
+      },
+      "chrono_p3_acs": {
+        "name": "Crono P3 ACS"
+      },
+      "chrono_p4_acs": {
+        "name": "Crono P4 ACS"
+      },
+      "chrono_p1_monday": {
+        "name": "Crono P1 lunedì"
+      },
+      "chrono_p1_tuesday": {
+        "name": "Crono P1 martedì"
+      },
+      "chrono_p1_wednesday": {
+        "name": "Crono P1 mercoledì"
+      },
+      "chrono_p1_thursday": {
+        "name": "Crono P1 giovedì"
+      },
+      "chrono_p1_friday": {
+        "name": "Crono P1 venerdì"
+      },
+      "chrono_p1_saturday": {
+        "name": "Crono P1 sabato"
+      },
+      "chrono_p1_sunday": {
+        "name": "Crono P1 domenica"
+      },
+      "chrono_p2_monday": {
+        "name": "Crono P2 lunedì"
+      },
+      "chrono_p2_tuesday": {
+        "name": "Crono P2 martedì"
+      },
+      "chrono_p2_wednesday": {
+        "name": "Crono P2 mercoledì"
+      },
+      "chrono_p2_thursday": {
+        "name": "Crono P2 giovedì"
+      },
+      "chrono_p2_friday": {
+        "name": "Crono P2 venerdì"
+      },
+      "chrono_p2_saturday": {
+        "name": "Crono P2 sabato"
+      },
+      "chrono_p2_sunday": {
+        "name": "Crono P2 domenica"
+      },
+      "chrono_p3_monday": {
+        "name": "Crono P3 lunedì"
+      },
+      "chrono_p3_tuesday": {
+        "name": "Crono P3 martedì"
+      },
+      "chrono_p3_wednesday": {
+        "name": "Crono P3 mercoledì"
+      },
+      "chrono_p3_thursday": {
+        "name": "Crono P3 giovedì"
+      },
+      "chrono_p3_friday": {
+        "name": "Crono P3 venerdì"
+      },
+      "chrono_p3_saturday": {
+        "name": "Crono P3 sabato"
+      },
+      "chrono_p3_sunday": {
+        "name": "Crono P3 domenica"
+      },
+      "chrono_p4_monday": {
+        "name": "Crono P4 lunedì"
+      },
+      "chrono_p4_tuesday": {
+        "name": "Crono P4 martedì"
+      },
+      "chrono_p4_wednesday": {
+        "name": "Crono P4 mercoledì"
+      },
+      "chrono_p4_thursday": {
+        "name": "Crono P4 giovedì"
+      },
+      "chrono_p4_friday": {
+        "name": "Crono P4 venerdì"
+      },
+      "chrono_p4_saturday": {
+        "name": "Crono P4 sabato"
+      },
+      "chrono_p4_sunday": {
+        "name": "Crono P4 domenica"
+      }
+    },
+    "select": {
+      "fan_mode": {
+        "name": "Modalità ventola"
+      }
+    },
+    "time": {
+      "chrono_p1_start": {
+        "name": "Crono P1 accensione"
+      },
+      "chrono_p1_stop": {
+        "name": "Crono P1 spegnimento"
+      },
+      "chrono_p2_start": {
+        "name": "Crono P2 accensione"
+      },
+      "chrono_p2_stop": {
+        "name": "Crono P2 spegnimento"
+      },
+      "chrono_p3_start": {
+        "name": "Crono P3 accensione"
+      },
+      "chrono_p3_stop": {
+        "name": "Crono P3 spegnimento"
+      },
+      "chrono_p4_start": {
+        "name": "Crono P4 accensione"
+      },
+      "chrono_p4_stop": {
+        "name": "Crono P4 spegnimento"
+      }
+    },
+    "climate": {
+      "water": {
+        "name": "Acqua"
+      }
+    }
+  }
+}

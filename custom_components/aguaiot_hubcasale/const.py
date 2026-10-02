@@ -1,5 +1,6 @@
 """Agua IOT constants."""
 
+import re
 from dataclasses import dataclass
 
 from .chrono import CHRONO_DAYS, CHRONO_PROGRAMS
@@ -80,6 +81,13 @@ class AguaIOTCanalizationEntityDescription(ClimateEntityDescription):
 
 
 DOMAIN = "aguaiot_hubcasale"
+
+
+def translation_key(description) -> str:
+    """Translation key of an entity description: its English name as a slug."""
+    return re.sub(r"[^a-z0-9]+", "_", description.name.lower()).strip("_")
+
+
 CONF_API_URL = "api_url"
 CONF_CUSTOMER_CODE = "customer_code"
 CONF_LOGIN_API_URL = "login_api_url"

@@ -7,7 +7,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 from .aguaiot import AguaIOTError
-from .const import DOMAIN, SWITCHES
+from .const import DOMAIN, SWITCHES, translation_key
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -37,16 +37,12 @@ class AguaIOTHeatingSwitch(CoordinatorEntity, SwitchEntity):
         super().__init__(coordinator)
         self._device = device
         self.entity_description = description
+        self._attr_translation_key = translation_key(description)
 
     @property
     def unique_id(self):
         """Return a unique ID."""
         return f"{self._device.id_device}_{self.entity_description.key}"
-
-    @property
-    def name(self):
-        """Return the name of the device, if any."""
-        return f"{self._device.name} {self.entity_description.name}"
 
     @property
     def device_info(self):

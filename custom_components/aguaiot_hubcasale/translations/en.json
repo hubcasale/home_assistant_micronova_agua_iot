@@ -105,5 +105,336 @@
         "sunday": "Sunday"
       }
     }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "alarm": {
+        "name": "Alarm"
+      },
+      "real_power": {
+        "name": "Real Power"
+      },
+      "real_pellet_power": {
+        "name": "Real Pellet Power"
+      },
+      "real_wood_power": {
+        "name": "Real Wood Power"
+      },
+      "real_vent_front": {
+        "name": "Real Vent Front"
+      },
+      "real_vent_rear": {
+        "name": "Real Vent Rear"
+      },
+      "fuel": {
+        "name": "Fuel"
+      },
+      "water_pressure": {
+        "name": "Water Pressure"
+      },
+      "brazier_pressure": {
+        "name": "Brazier Pressure"
+      },
+      "extractor_fan": {
+        "name": "Extractor Fan"
+      },
+      "water_pump": {
+        "name": "Water Pump"
+      },
+      "smoke_temperature": {
+        "name": "Smoke Temperature"
+      },
+      "flame_temperature": {
+        "name": "Flame Temperature"
+      },
+      "air_temperature": {
+        "name": "Air Temperature"
+      },
+      "remote_air_temperature": {
+        "name": "Remote Air Temperature"
+      },
+      "vent_rear_temperature": {
+        "name": "Vent Rear Temperature"
+      },
+      "vent_front_temperature": {
+        "name": "Vent Front Temperature"
+      },
+      "water_temperature": {
+        "name": "Water Temperature"
+      },
+      "wood_temperature": {
+        "name": "Wood Temperature"
+      },
+      "pellet_level": {
+        "name": "Pellet Level"
+      },
+      "pellet_quality": {
+        "name": "Pellet Quality"
+      },
+      "combustion_quality": {
+        "name": "Combustion Quality"
+      },
+      "total_hours": {
+        "name": "Total Hours"
+      },
+      "partial_hours": {
+        "name": "Partial Hours"
+      },
+      "service_hours": {
+        "name": "Service Hours"
+      },
+      "threshold_service_hours": {
+        "name": "Threshold Service Hours"
+      },
+      "boiler_temperature": {
+        "name": "Boiler Temperature"
+      },
+      "puffer_temperature_high": {
+        "name": "Puffer Temperature High"
+      },
+      "puffer_temperature_low": {
+        "name": "Puffer Temperature Low"
+      },
+      "three_way_valve": {
+        "name": "Three-way Valve"
+      }
+    },
+    "binary_sensor": {
+      "pellets_depleted": {
+        "name": "Pellets Depleted"
+      },
+      "wood_reserve": {
+        "name": "Wood Reserve"
+      },
+      "external_thermostat": {
+        "name": "External Thermostat"
+      },
+      "external_thermostat_rear": {
+        "name": "External Thermostat Rear"
+      },
+      "external_puffer_thermostat": {
+        "name": "External Puffer Thermostat"
+      },
+      "external_boiler_thermostat": {
+        "name": "External Boiler Thermostat"
+      },
+      "flow_switch": {
+        "name": "Flow Switch"
+      }
+    },
+    "number": {
+      "energy_saving_start": {
+        "name": "Energy Saving Start"
+      },
+      "energy_saving_stop": {
+        "name": "Energy Saving Stop"
+      },
+      "power": {
+        "name": "Power"
+      },
+      "pellet_power": {
+        "name": "Pellet Power"
+      },
+      "wood_power": {
+        "name": "Wood Power"
+      },
+      "eco_stop_time": {
+        "name": "ECO Stop Time"
+      },
+      "pellet_quality": {
+        "name": "Pellet Quality"
+      },
+      "combustion_quality": {
+        "name": "Combustion Quality"
+      },
+      "boiler_setpoint": {
+        "name": "Boiler Setpoint"
+      },
+      "puffer_setpoint": {
+        "name": "Puffer Setpoint"
+      },
+      "chrono_p1_water_setpoint": {
+        "name": "Chrono P1 Water Setpoint"
+      },
+      "chrono_p2_water_setpoint": {
+        "name": "Chrono P2 Water Setpoint"
+      },
+      "chrono_p3_water_setpoint": {
+        "name": "Chrono P3 Water Setpoint"
+      },
+      "chrono_p4_water_setpoint": {
+        "name": "Chrono P4 Water Setpoint"
+      },
+      "chrono_p1_boiler_setpoint": {
+        "name": "Chrono P1 Boiler Setpoint"
+      },
+      "chrono_p2_boiler_setpoint": {
+        "name": "Chrono P2 Boiler Setpoint"
+      },
+      "chrono_p3_boiler_setpoint": {
+        "name": "Chrono P3 Boiler Setpoint"
+      },
+      "chrono_p4_boiler_setpoint": {
+        "name": "Chrono P4 Boiler Setpoint"
+      }
+    },
+    "switch": {
+      "natural_mode": {
+        "name": "Natural Mode"
+      },
+      "standby": {
+        "name": "Standby"
+      },
+      "auto_mode": {
+        "name": "Auto Mode"
+      },
+      "powerful_mode": {
+        "name": "Powerful Mode"
+      },
+      "eco_stop": {
+        "name": "ECO Stop"
+      },
+      "sleep_mode": {
+        "name": "Sleep Mode"
+      },
+      "weekly_chrono": {
+        "name": "Weekly Chrono"
+      },
+      "chrono_p1_acs": {
+        "name": "Chrono P1 ACS"
+      },
+      "chrono_p2_acs": {
+        "name": "Chrono P2 ACS"
+      },
+      "chrono_p3_acs": {
+        "name": "Chrono P3 ACS"
+      },
+      "chrono_p4_acs": {
+        "name": "Chrono P4 ACS"
+      },
+      "chrono_p1_monday": {
+        "name": "Chrono P1 Monday"
+      },
+      "chrono_p1_tuesday": {
+        "name": "Chrono P1 Tuesday"
+      },
+      "chrono_p1_wednesday": {
+        "name": "Chrono P1 Wednesday"
+      },
+      "chrono_p1_thursday": {
+        "name": "Chrono P1 Thursday"
+      },
+      "chrono_p1_friday": {
+        "name": "Chrono P1 Friday"
+      },
+      "chrono_p1_saturday": {
+        "name": "Chrono P1 Saturday"
+      },
+      "chrono_p1_sunday": {
+        "name": "Chrono P1 Sunday"
+      },
+      "chrono_p2_monday": {
+        "name": "Chrono P2 Monday"
+      },
+      "chrono_p2_tuesday": {
+        "name": "Chrono P2 Tuesday"
+      },
+      "chrono_p2_wednesday": {
+        "name": "Chrono P2 Wednesday"
+      },
+      "chrono_p2_thursday": {
+        "name": "Chrono P2 Thursday"
+      },
+      "chrono_p2_friday": {
+        "name": "Chrono P2 Friday"
+      },
+      "chrono_p2_saturday": {
+        "name": "Chrono P2 Saturday"
+      },
+      "chrono_p2_sunday": {
+        "name": "Chrono P2 Sunday"
+      },
+      "chrono_p3_monday": {
+        "name": "Chrono P3 Monday"
+      },
+      "chrono_p3_tuesday": {
+        "name": "Chrono P3 Tuesday"
+      },
+      "chrono_p3_wednesday": {
+        "name": "Chrono P3 Wednesday"
+      },
+      "chrono_p3_thursday": {
+        "name": "Chrono P3 Thursday"
+      },
+      "chrono_p3_friday": {
+        "name": "Chrono P3 Friday"
+      },
+      "chrono_p3_saturday": {
+        "name": "Chrono P3 Saturday"
+      },
+      "chrono_p3_sunday": {
+        "name": "Chrono P3 Sunday"
+      },
+      "chrono_p4_monday": {
+        "name": "Chrono P4 Monday"
+      },
+      "chrono_p4_tuesday": {
+        "name": "Chrono P4 Tuesday"
+      },
+      "chrono_p4_wednesday": {
+        "name": "Chrono P4 Wednesday"
+      },
+      "chrono_p4_thursday": {
+        "name": "Chrono P4 Thursday"
+      },
+      "chrono_p4_friday": {
+        "name": "Chrono P4 Friday"
+      },
+      "chrono_p4_saturday": {
+        "name": "Chrono P4 Saturday"
+      },
+      "chrono_p4_sunday": {
+        "name": "Chrono P4 Sunday"
+      }
+    },
+    "select": {
+      "fan_mode": {
+        "name": "Fan Mode"
+      }
+    },
+    "time": {
+      "chrono_p1_start": {
+        "name": "Chrono P1 Start"
+      },
+      "chrono_p1_stop": {
+        "name": "Chrono P1 Stop"
+      },
+      "chrono_p2_start": {
+        "name": "Chrono P2 Start"
+      },
+      "chrono_p2_stop": {
+        "name": "Chrono P2 Stop"
+      },
+      "chrono_p3_start": {
+        "name": "Chrono P3 Start"
+      },
+      "chrono_p3_stop": {
+        "name": "Chrono P3 Stop"
+      },
+      "chrono_p4_start": {
+        "name": "Chrono P4 Start"
+      },
+      "chrono_p4_stop": {
+        "name": "Chrono P4 Stop"
+      }
+    },
+    "climate": {
+      "water": {
+        "name": "Water"
+      }
+    }
   }
 }
