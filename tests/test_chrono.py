@@ -11,7 +11,7 @@ import pytest
 from tests.helpers import build_device_from_fixture
 
 _CHRONO_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "custom_components", "aguaiot", "chrono.py"
+    os.path.dirname(__file__), "..", "custom_components", "aguaiot_hubcasale", "chrono.py"
 )
 _spec = importlib.util.spec_from_file_location("aguaiot_chrono", _CHRONO_PATH)
 chrono = importlib.util.module_from_spec(_spec)

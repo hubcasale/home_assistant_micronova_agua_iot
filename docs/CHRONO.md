@@ -18,7 +18,7 @@ every register the device reports as enabled, so you only see what your model su
 They are in the *Configuration* section of the device page. A time that is not set is
 shown as `unknown` (the device stores `144`, shown as `--:--` in the vendor app).
 
-## Service `aguaiot.set_chrono_program`
+## Service `aguaiot_hubcasale.set_chrono_program`
 
 Programs one chrono program in a **single request** (much faster and safer than writing
 the 10+ entities one by one). Only the fields you provide are changed; if you provide
@@ -26,7 +26,7 @@ the 10+ entities one by one). Only the fields you provide are changed; if you pr
 
 ```yaml
 # Run the boiler from 05:00 to 00:30, every day: it will not start between 00:30 and 05:00
-action: aguaiot.set_chrono_program
+action: aguaiot_hubcasale.set_chrono_program
 target:
   entity_id: climate.casale_water
 data:

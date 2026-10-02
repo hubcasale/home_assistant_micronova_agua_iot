@@ -1,4 +1,9 @@
-# Micronova Agua IOT
+# Micronova Agua IOT (hubcasale fork)
+
+> **Fork of [vincentwolsink/home_assistant_micronova_agua_iot](https://github.com/vincentwolsink/home_assistant_micronova_agua_iot)**
+> with support for the Nobis Polygon boiler (boiler/puffer registers, weekly chrono programs, Italian translation).
+> It installs as a **separate integration** (domain `aguaiot_hubcasale`) so it can live next to the original one.
+> Remove the original *Micronova Agua IOT* entry before adding this one, otherwise entity ids get a `_2` suffix.
 
 [![GitHub Release][releases-shield]][releases]
 [![Maintainer][maintainer-shield]][maintainer]
@@ -62,7 +67,7 @@ Or folow these steps:
 ## Nobis Polygon and boilers with puffer / DHW tank
 Extra registers exposed by water boilers (boiler and puffer temperatures, set points, three-way valve,
 external thermostat contacts, flow switch, sleep mode) and the **weekly chrono programs** are supported.
-See [docs/CHRONO.md](docs/CHRONO.md) for the chrono entities and the `aguaiot.set_chrono_program` service.
+See [docs/CHRONO.md](docs/CHRONO.md) for the chrono entities and the `aguaiot_hubcasale.set_chrono_program` service.
 
 ## Local Bluetooth mode
 

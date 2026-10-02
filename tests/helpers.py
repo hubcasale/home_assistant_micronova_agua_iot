@@ -4,7 +4,7 @@ import sys
 
 # Load aguaiot.py directly to avoid __init__.py import cascade
 _AGUAIOT_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "custom_components", "aguaiot", "aguaiot.py"
+    os.path.dirname(__file__), "..", "custom_components", "aguaiot_hubcasale", "aguaiot.py"
 )
 _spec = importlib.util.spec_from_file_location("aguaiot_module", _AGUAIOT_PATH)
 _aguaiot_module = importlib.util.module_from_spec(_spec)

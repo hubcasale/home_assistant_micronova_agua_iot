@@ -79,7 +79,7 @@ class AguaIOTCanalizationEntityDescription(ClimateEntityDescription):
     key2_enable: str | None = None
 
 
-DOMAIN = "aguaiot"
+DOMAIN = "aguaiot_hubcasale"
 CONF_API_URL = "api_url"
 CONF_CUSTOMER_CODE = "customer_code"
 CONF_LOGIN_API_URL = "login_api_url"
