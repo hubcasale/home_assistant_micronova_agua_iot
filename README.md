@@ -57,7 +57,7 @@ Vendor apps **NOT** compatible (using a different platform or abstraction layer)
 
 ## Installation
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=vincentwolsink&repository=home_assistant_micronova_agua_iot&category=integration)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=hubcasale&repository=home_assistant_micronova_agua_iot_hubcasale&category=integration)
 
 Or folow these steps:
 1. Install [HACS](https://hacs.xyz/) if you haven't already
@@ -90,9 +90,9 @@ For local stove control with custom hardware on the stove bus, take a look at on
 * https://github.com/philibertc/micronova_controller
 * https://github.com/Shad107/OpenXtraflame
 
-[releases-shield]: https://img.shields.io/github/v/release/vincentwolsink/home_assistant_micronova_agua_iot.svg?style=for-the-badge
-[releases]: https://github.com/vincentwolsink/home_assistant_micronova_agua_iot/releases
+[releases-shield]: https://img.shields.io/github/v/release/hubcasale/home_assistant_micronova_agua_iot_hubcasale.svg?style=for-the-badge
+[releases]: https://github.com/hubcasale/home_assistant_micronova_agua_iot_hubcasale/releases
 [maintainer-shield]: https://img.shields.io/badge/maintainer-vincentwolsink-blue.svg?style=for-the-badge
 [maintainer]: https://github.com/vincentwolsink
 [hacs-shield]: https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge
-[hacs-url]: https://github.com/vincentwolsink/home_assistant_micronova_agua_iot
+[hacs-url]: https://github.com/hubcasale/home_assistant_micronova_agua_iot_hubcasale
