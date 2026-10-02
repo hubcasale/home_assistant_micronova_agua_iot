@@ -5,6 +5,7 @@ import logging
 import numbers
 import re
 
+import voluptuous as vol
 from homeassistant.components.climate import ClimateEntity
 from homeassistant.components.climate.const import (
     ClimateEntityFeature,
@@ -16,6 +17,8 @@ from homeassistant.const import (
     PRECISION_HALVES,
     UnitOfTemperature,
 )
+from homeassistant.exceptions import ServiceValidationError
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_platform
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.update_coordinator import (
@@ -24,6 +27,12 @@ from homeassistant.helpers.update_coordinator import (
 from homeassistant.util import dt
 
 from .aguaiot import AguaIOTError
+from .chrono import (
+    CHRONO_DAYS,
+    CHRONO_PROGRAMS,
+    CHRONO_WEEK_ENABLE_KEY,
+    build_program_items,
+)
 from .const import (
     AIR_VARIANTS,
     CLIMATE_CANALIZATIONS,
@@ -103,6 +112,22 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         {},
         "sync_clock",
     )
+    platform.async_register_entity_service(
+        "set_chrono_program",
+        {
+            vol.Required("program"): vol.All(
+                vol.Coerce(int), vol.In(CHRONO_PROGRAMS)
+            ),
+            vol.Optional("start"): cv.time,
+            vol.Optional("stop"): cv.time,
+            vol.Optional("days"): vol.All(cv.ensure_list, [vol.In(CHRONO_DAYS)]),
+            vol.Optional("water_temperature"): vol.Coerce(float),
+            vol.Optional("boiler_temperature"): vol.Coerce(float),
+            vol.Optional("acs"): cv.boolean,
+            vol.Optional("weekly_enabled"): cv.boolean,
+        },
+        "set_chrono_program",
+    )
 
 
 class AguaIOTClimateDevice(CoordinatorEntity, ClimateEntity):
@@ -125,6 +150,47 @@ class AguaIOTClimateDevice(CoordinatorEntity, ClimateEntity):
     def precision(self):
         """Return the precision of the system."""
         return PRECISION_HALVES
+
+    async def set_chrono_program(
+        self,
+        program,
+        start=None,
+        stop=None,
+        days=None,
+        water_temperature=None,
+        boiler_temperature=None,
+        acs=None,
+        weekly_enabled=None,
+    ):
+        """Program one weekly chrono program (all values in a single request)."""
+        items = build_program_items(
+            program,
+            start=start,
+            stop=stop,
+            days=days,
+            water_temperature=water_temperature,
+            boiler_temperature=boiler_temperature,
+            acs=acs,
+        )
+        if weekly_enabled is not None:
+            items[CHRONO_WEEK_ENABLE_KEY] = 1 if weekly_enabled else 0
+
+        if not items:
+            raise ServiceValidationError("No value to set")
+
+        missing = [key for key in items if key not in self._device.registers]
+        if missing:
+            raise ServiceValidationError(
+                f"This device does not support: {', '.join(sorted(missing))}"
+            )
+
+        try:
+            await self._device.set_register_values(items)
+            await self.coordinator.async_request_refresh()
+        except (ValueError, AguaIOTError) as err:
+            raise ServiceValidationError(
+                f"Failed to set chrono program {program}: {err}"
+            ) from err
 
 
 class AguaIOTAirDevice(AguaIOTClimateDevice):

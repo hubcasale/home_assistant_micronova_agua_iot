@@ -2,6 +2,8 @@
 
 from dataclasses import dataclass
 
+from .chrono import CHRONO_DAYS, CHRONO_PROGRAMS
+
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntityDescription,
@@ -23,8 +25,10 @@ from homeassistant.components.switch import (
     SwitchDeviceClass,
     SwitchEntityDescription,
 )
+from homeassistant.components.time import TimeEntityDescription
 from homeassistant.const import (
     REVOLUTIONS_PER_MINUTE,
+    EntityCategory,
     Platform,
     UnitOfPressure,
     UnitOfTemperature,
@@ -52,6 +56,17 @@ class AguaIOTNumberEntityDescription(NumberEntityDescription):
     force_enabled: bool = False
     hybrid_only: bool = False
     hybrid_exclude: bool = False
+
+
+@dataclass
+class AguaIOTSwitchEntityDescription(SwitchEntityDescription):
+    value_on: int = 1
+    value_off: int = 0
+
+
+@dataclass
+class AguaIOTTimeEntityDescription(TimeEntityDescription):
+    pass
 
 
 @dataclass
@@ -115,6 +130,7 @@ PLATFORMS = [
     Platform.SWITCH,
     Platform.NUMBER,
     Platform.SELECT,
+    Platform.TIME,
 ]
 
 ENDPOINTS = {
@@ -293,6 +309,24 @@ BINARY_SENSORS = (
         name="External Thermostat Rear",
         icon="mdi:electric-switch",
         icon_on="mdi:electric-switch-closed",
+    ),
+    AguaIOTBinarySensorEntityDescription(
+        key="ext_puffertherm_get",
+        name="External Puffer Thermostat",
+        icon="mdi:electric-switch",
+        icon_on="mdi:electric-switch-closed",
+    ),
+    AguaIOTBinarySensorEntityDescription(
+        key="ext_boiltherm_get",
+        name="External Boiler Thermostat",
+        icon="mdi:electric-switch",
+        icon_on="mdi:electric-switch-closed",
+    ),
+    AguaIOTBinarySensorEntityDescription(
+        key="flussostat_group_get",
+        name="Flow Switch",
+        icon="mdi:water-pump-off",
+        icon_on="mdi:water-pump",
     ),
 )
 
@@ -551,6 +585,38 @@ SENSORS = (
         native_unit_of_measurement=UnitOfTime.HOURS,
         device_class=SensorDeviceClass.DURATION,
     ),
+    AguaIOTSensorEntityDescription(
+        key="temp_h2o_boiler2_get",
+        name="Boiler Temperature",
+        icon="mdi:water-boiler",
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.TEMPERATURE,
+    ),
+    AguaIOTSensorEntityDescription(
+        key="temp_h2o_puffer_h_get",
+        name="Puffer Temperature High",
+        icon="mdi:storage-tank",
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.TEMPERATURE,
+    ),
+    AguaIOTSensorEntityDescription(
+        key="temp_h2o_puffer_l_get",
+        name="Puffer Temperature Low",
+        icon="mdi:storage-tank-outline",
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.TEMPERATURE,
+    ),
+    AguaIOTSensorEntityDescription(
+        key="vie_3_get",
+        name="Three-way Valve",
+        icon="mdi:valve",
+        native_unit_of_measurement=None,
+        state_class=None,
+        device_class=SensorDeviceClass.ENUM,
+    ),
 )
 
 SWITCHES = (
@@ -583,6 +649,42 @@ SWITCHES = (
         name="ECO Stop",
         icon="mdi:leaf-off",
         device_class=SwitchDeviceClass.SWITCH,
+    ),
+    AguaIOTSwitchEntityDescription(
+        key="sleep_mode_set",
+        name="Sleep Mode",
+        icon="mdi:sleep",
+        device_class=SwitchDeviceClass.SWITCH,
+        entity_category=EntityCategory.CONFIG,
+    ),
+    AguaIOTSwitchEntityDescription(
+        key="chrono_week_enable_set",
+        name="Weekly Chrono",
+        icon="mdi:calendar-clock",
+        device_class=SwitchDeviceClass.SWITCH,
+    ),
+    *(
+        AguaIOTSwitchEntityDescription(
+            key=f"chrono_p{program}_acs_set",
+            name=f"Chrono P{program} ACS",
+            icon="mdi:water-boiler",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+            value_on=2,
+            value_off=1,
+        )
+        for program in CHRONO_PROGRAMS
+    ),
+    *(
+        AguaIOTSwitchEntityDescription(
+            key=f"chrono_p{program}_day_{day}_set",
+            name=f"Chrono P{program} {day.capitalize()}",
+            icon="mdi:calendar-check",
+            device_class=SwitchDeviceClass.SWITCH,
+            entity_category=EntityCategory.CONFIG,
+        )
+        for program in CHRONO_PROGRAMS
+        for day in CHRONO_DAYS
     ),
 )
 
@@ -644,6 +746,46 @@ NUMBERS = (
         name="Combustion Quality",
         icon="mdi:fire-circle",
         native_step=1,
+    ),
+    AguaIOTNumberEntityDescription(
+        key="temp_h2o_boiler_set",
+        name="Boiler Setpoint",
+        icon="mdi:water-boiler",
+        native_step=1,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+    ),
+    AguaIOTNumberEntityDescription(
+        key="temp_h2o_puffer_set",
+        name="Puffer Setpoint",
+        icon="mdi:storage-tank",
+        native_step=1,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        device_class=NumberDeviceClass.TEMPERATURE,
+    ),
+    *(
+        AguaIOTNumberEntityDescription(
+            key=f"chrono_p{program}_t_water_set",
+            name=f"Chrono P{program} Water Setpoint",
+            icon="mdi:thermometer-water",
+            native_step=1,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_category=EntityCategory.CONFIG,
+        )
+        for program in CHRONO_PROGRAMS
+    ),
+    *(
+        AguaIOTNumberEntityDescription(
+            key=f"chrono_p{program}_t_boiler_set",
+            name=f"Chrono P{program} Boiler Setpoint",
+            icon="mdi:water-boiler",
+            native_step=1,
+            native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+            device_class=NumberDeviceClass.TEMPERATURE,
+            entity_category=EntityCategory.CONFIG,
+        )
+        for program in CHRONO_PROGRAMS
     ),
 )
 
@@ -708,5 +850,18 @@ SELECTS = (
         key="fan2_mode_set",
         name="Fan Mode",
         icon="mdi:fan",
+    ),
+)
+
+TIMES = (
+    *(
+        AguaIOTTimeEntityDescription(
+            key=f"chrono_p{program}_{edge}_set",
+            name=f"Chrono P{program} {edge.capitalize()}",
+            icon="mdi:clock-start" if edge == "start" else "mdi:clock-end",
+            entity_category=EntityCategory.CONFIG,
+        )
+        for program in CHRONO_PROGRAMS
+        for edge in ("start", "stop")
     ),
 )

@@ -2,3 +2,57 @@ sync_clock:
   target:
     entity:
       domain: climate
+
+set_chrono_program:
+  target:
+    entity:
+      domain: climate
+  fields:
+    program:
+      required: true
+      default: 1
+      selector:
+        number:
+          min: 1
+          max: 4
+          mode: box
+    start:
+      selector:
+        time:
+    stop:
+      selector:
+        time:
+    days:
+      selector:
+        select:
+          multiple: true
+          mode: list
+          translation_key: chrono_days
+          options:
+            - monday
+            - tuesday
+            - wednesday
+            - thursday
+            - friday
+            - saturday
+            - sunday
+    water_temperature:
+      selector:
+        number:
+          min: 40
+          max: 90
+          unit_of_measurement: "°C"
+          mode: box
+    boiler_temperature:
+      selector:
+        number:
+          min: 30
+          max: 90
+          unit_of_measurement: "°C"
+          mode: box
+    acs:
+      selector:
+        boolean:
+    weekly_enabled:
+      selector:
+        boolean:

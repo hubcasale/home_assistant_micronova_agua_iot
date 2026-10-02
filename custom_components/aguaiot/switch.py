@@ -61,12 +61,19 @@ class AguaIOTHeatingSwitch(CoordinatorEntity, SwitchEntity):
     @property
     def is_on(self):
         """Return the state of the sensor."""
-        return bool(self._device.get_register_value(self.entity_description.key))
+        value = self._device.get_register_value(self.entity_description.key)
+        value_on = getattr(self.entity_description, "value_on", 1)
+        if value_on == 1:
+            return bool(value)
+        return value == value_on
 
     async def async_turn_off(self):
         """Turn device off."""
         try:
-            await self._device.set_register_value(self.entity_description.key, 0)
+            await self._device.set_register_value(
+                self.entity_description.key,
+                getattr(self.entity_description, "value_off", 0),
+            )
             await self.coordinator.async_request_refresh()
         except AguaIOTError as err:
             _LOGGER.error(
@@ -78,7 +85,10 @@ class AguaIOTHeatingSwitch(CoordinatorEntity, SwitchEntity):
     async def async_turn_on(self):
         """Turn device on."""
         try:
-            await self._device.set_register_value(self.entity_description.key, 1)
+            await self._device.set_register_value(
+                self.entity_description.key,
+                getattr(self.entity_description, "value_on", 1),
+            )
             await self.coordinator.async_request_refresh()
         except AguaIOTError as err:
             _LOGGER.error(

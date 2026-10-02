@@ -59,6 +59,11 @@ Or folow these steps:
 2. Install the plugin via HACS (Micronova Agua IOT)
 3. Add the integration through the home assistant configuration flow
 
+## Nobis Polygon and boilers with puffer / DHW tank
+Extra registers exposed by water boilers (boiler and puffer temperatures, set points, three-way valve,
+external thermostat contacts, flow switch, sleep mode) and the **weekly chrono programs** are supported.
+See [docs/CHRONO.md](docs/CHRONO.md) for the chrono entities and the `aguaiot.set_chrono_program` service.
+
 ## Local Bluetooth mode
 
 This integration now includes an experimental `Bluetooth` connection mode for Micronova stoves equipped with a local BLE module (for example the Micronova / Navel `T009_*` module seen by Home Assistant).

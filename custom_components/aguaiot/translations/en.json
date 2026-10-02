@@ -23,6 +23,44 @@
     "sync_clock": {
       "name": "Synchronize Stove Clock",
       "description": "Synchronize stove time and date with the current Home Assistant time and date."
+    },
+    "set_chrono_program": {
+      "name": "Set chrono program",
+      "description": "Program one of the weekly chrono programs of the stove/boiler in a single request. Only the fields you fill in are changed. The days you select are enabled, all the others are disabled. Times are rounded down to 10 minutes.",
+      "fields": {
+        "program": {
+          "name": "Program",
+          "description": "Chrono program number (1-4)."
+        },
+        "start": {
+          "name": "Start time",
+          "description": "Time the program switches the appliance on."
+        },
+        "stop": {
+          "name": "Stop time",
+          "description": "Time the program switches the appliance off."
+        },
+        "days": {
+          "name": "Days",
+          "description": "Weekdays on which the program is active."
+        },
+        "water_temperature": {
+          "name": "Water temperature",
+          "description": "Water set temperature used by the program."
+        },
+        "boiler_temperature": {
+          "name": "Boiler temperature",
+          "description": "Boiler (DHW tank) set temperature used by the program."
+        },
+        "acs": {
+          "name": "DHW",
+          "description": "Enable domestic hot water production during the program."
+        },
+        "weekly_enabled": {
+          "name": "Weekly chrono enabled",
+          "description": "Switch the weekly chrono function on or off for the whole device."
+        }
+      }
     }
   },
   "options": {
@@ -52,8 +90,19 @@
   "selector": {
     "connection_mode": {
       "options": {
-      "connection_cloud": "Cloud (Micronova API)",
-      "connection_bluetooth": "Bluetooth (auto-detect)"
+        "connection_cloud": "Cloud (Micronova API)",
+        "connection_bluetooth": "Bluetooth (auto-detect)"
+      }
+    },
+    "chrono_days": {
+      "options": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
       }
     }
   }
